@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExamGos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_activity">Hello blank activity</string>
+    <string name="add_button">Добавить</string>
+    <string name="add_film_detail_button">добавить фильм</string>
+</resources>
