@@ -1,0 +1,123 @@
+document.getElementById("signInForm")
+    .addEventListener("submit", (event) => {
+        event.preventDefault();
+        const currentForm = event.target;
+        const formData = new FormData(currentForm);
+        const login = formData.get("login");
+
+        fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits')
+            .then(response => response.json())
+            .then(commits  => {
+               alert(login);
+                const root = document.getElementById("list");
+                root.innerHTML = '';
+
+                const list = document.createElement('ul');
+
+                for (i = 0; i < commits.length; i++) {
+                    const value = commits[i].url;
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = value;
+                    if (value.includes(login)) {
+                        listItem.setAttribute("class", "our")
+                    }
+                    else{
+                        listItem.setAttribute("class", "noour")
+                    }
+                    list.appendChild(listItem);
+                }
+                root.appendChild(list);
+            });
+    });
+
+    document.getElementById("clearbutton")
+    .addEventListener("click", ()=>{
+        const root = document.getElementById("list")
+        root.innerHTML = '';
+    }
+    )
+    
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Главная</title>
+</head>
+
+<body>
+    <div>
+        <form id="signInForm">
+                <input type="text" name="login" placeholder="ввод текста">
+                <button id="build" type="submit">Построить</button>
+                <button id="clearbutton" type="reset">Очистить</button>
+        </form>
+        <div id="list"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+html, body {
+    height: 100%;
+}
+
+#footer {
+    position: fixed; /* Фиксированное положение */
+    left: 0; bottom: 0; /* Левый нижний угол */
+    padding: 10px; /* Поля вокруг текста */
+    background: #39b54a; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    width: 100%; /* Ширина слоя */
+}
+
+#mainWrapper {
+    display: flex;
+    flex-grow: 1;
+}
+
+#product-wrapper{
+    margin: 10px;
+    padding: 5px;
+}
+
+aside {
+    background: #f0f0f0;
+    padding: 10px;
+    width: 200px;
+    float: right;
+   }
+
+div {
+    margin: 10px;
+    padding: 5px;
+}
+
+a {
+    text-decoration: none;
+    /* Отменяем подчеркивание у ссылки */
+}
+
+table {
+    width: 100%;
+    border: 1px solid #399;
+}
+
+td, th {
+    width: 25%;
+    text-align: center;
+    border: 1px solid #399;
+}
+
+li.our{
+    background: #39b54a;
+}
+
+li.noour{
+    background: #39b;
+}
